@@ -1,7 +1,9 @@
 package com.example.duastelas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,8 +14,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnGoToTela2 = findViewById(R.id.btnGoToTela1)
-        btnGoToTela2.setOnClickListener{ it: View
-            val intent = Intent(this, tela2::class.java)
+        btnGoToTela2.setOnClickListener {
+            val intent = Intent(this, Tela2::class.java)
             startActivity(intent)
+        }
     }
 }
