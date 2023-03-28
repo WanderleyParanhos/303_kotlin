@@ -1,4 +1,4 @@
-package com.example.duastelasretorno
+package br.com.slmm.duastelaretorno
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +12,14 @@ class TelaValores : AppCompatActivity() {
         setContentView(R.layout.activity_tela_valores)
 
         val btnRetorno = findViewById(R.id.btnVoltar) as Button
-        btnRetorno.setOnClickListener{
+        btnRetorno.setOnClickListener {
             val txt = findViewById(R.id.txt1) as TextView
             var msg = txt.text
             val intent = Intent()
             intent.putExtra("ActivityResult",msg)
             setResult(RESULT_OK, intent)
             finish()
+
         }
     }
 }
