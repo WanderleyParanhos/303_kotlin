@@ -1,4 +1,4 @@
-package com.example.duastelasretorno
+package br.com.slmm.duastelaretorno
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
@@ -15,21 +15,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            Log.d("Teste", "Retorno")
+        val launcher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            Log.d("Teste","Retorno")
             Log.d("Teste", result.resultCode.toString())
-            if(result.resultCode == Actvity_RESULT_OK){
-                val data: Intent? = result.data
-                val txt = findViewById(R.id.textView) as TextView
-                val msg = data?.extras.getStringExtra("ActivityResult")
-                txt.SetText(msg)
+            if (result.resultCode == Activity.RESULT_OK){
+                //val data: Intent? = result.data
+
+                val bundle: Bundle? = result.data?.extras
+                var msg = bundle?.getString("ActivityResult").toString()
+                msg = bundle?get("ActivityResult")
+
+
+                //getStringExtra("ActivityResult")
+                var txt = findViewById(R.id.textView) as TextView
+                txt.setText(msg)
             }
 
+        }
+
         val btnNext = findViewById(R.id.btnGetValor) as Button
-        btnNext.SetOnClickListener{
+        btnNext.setOnClickListener{
             val intent = Intent(this, TelaValores::class.java)
-            laucher.launch(intent)
+            launcher.launch(intent)
         }
     }
-    }
+
+
+
+    //@Deprecated("Decrepted in Java")
+    //override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    //    super.onActivityResult(requestCode, resultCode, data)
+    //}
+
 }
